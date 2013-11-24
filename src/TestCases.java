@@ -15,51 +15,57 @@ import org.openqa.selenium.support.ui.Select;
 
 
 public class TestCases {
+	/*	
+	static final int Utils.MS_IN_A_SECOND = 1000;
+	static final int Utils.SLEEP_INTERVAL = 500; //1000 = 1 second
+	static final int Utils.SECONDS_UNTIL_TIMEOUT = 20;
+	static final int Utils.PERIODS_TO_WAIT = (Utils.MS_IN_A_SECOND/Utils.SLEEP_INTERVAL)*Utils.SECONDS_UNTIL_TIMEOUT;
+	
 	private WebDriver driver;
 	private String baseUrl;
 	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();
+	private StringBuffer verificationErrors = new StringBuffer();*/
 
 	@Before
 	public void setUp() throws Exception {
-		driver = new FirefoxDriver();
-		baseUrl = "https://new.toggl.com/";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		Utils.driver = new FirefoxDriver();
+		Utils.baseUrl = "https://new.toggl.com/";
+		Utils.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		Login();
 	}
 
 
 	public void Login() throws Exception {
-		driver.get(baseUrl + "/");
-		driver.findElement(By.xpath("//div[@id='wrap']/div/div[2]/button")).click();
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Log in with Google".equals(driver.findElement(By.id("google_header_login")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.get(Utils.baseUrl + "/");
+		Utils.driver.findElement(By.xpath("//div[@id='wrap']/div/div[2]/button")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Log in with Google".equals(Utils.driver.findElement(By.id("google_header_login")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.id("google_header_login")).click();
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("".equals(driver.findElement(By.id("Email")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.id("google_header_login")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("".equals(Utils.driver.findElement(By.id("Email")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.id("Email")).clear();
-		driver.findElement(By.id("Email")).sendKeys("416group18");
-		driver.findElement(By.id("Passwd")).clear();
-		driver.findElement(By.id("Passwd")).sendKeys("togglaccount");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("".equals(driver.findElement(By.id("signIn")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.id("Email")).clear();
+		Utils.driver.findElement(By.id("Email")).sendKeys("416group18");
+		Utils.driver.findElement(By.id("Passwd")).clear();
+		Utils.driver.findElement(By.id("Passwd")).sendKeys("togglaccount");
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("".equals(Utils.driver.findElement(By.id("signIn")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.id("signIn")).click();
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("416 Group18".equals(driver.findElement(By.linkText("416 Group18")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.id("signIn")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("416 Group18".equals(Utils.driver.findElement(By.linkText("416 Group18")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
 	}
@@ -67,56 +73,56 @@ public class TestCases {
 	@Test
 	public void testAddTask() throws Exception {
 		// Now logged in
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("//input[@type='text']"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("//input[@type='text']"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("//input[@type='text']"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("//input[@type='text']"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.xpath("//input[@type='text']")).clear();
-		driver.findElement(By.xpath("//input[@type='text']")).sendKeys("test");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Start".equals(driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.xpath("//input[@type='text']")).clear();
+		Utils.driver.findElement(By.xpath("//input[@type='text']")).sendKeys("test");
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Start".equals(Utils.driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
 
-		driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).click();
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Stop".equals(driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Stop".equals(Utils.driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Utils.SLEEP_INTERVAL);
 
-		driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).click();
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Start".equals(driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("(//input[@type='text'])[3]"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Start".equals(Utils.driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		//    for (int second = 0;; second++) {
-		//    	if (second >= 60) fail("timeout");
-		//    	try { if ("test".equals(driver.findElement(By.cssSelector("span.js-description")).getText())) break; } catch (Exception e) {}
-		//    	Thread.sleep(1000);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("(//input[@type='text'])[3]"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+
+		//    for (int period = 0;; period++) {
+		//    	if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+		//    	try { if ("test".equals(Utils.driver.findElement(By.cssSelector("span.js-description")).getText())) break; } catch (Exception e) {}
+		//    	Thread.sleep(Utils.SLEEP_INTERVAL);
 		//    }
 		//
 		//    try {
-		//      assertEquals("test", driver.findElement(By.cssSelector("span.js-description")).getText());
+		//      assertEquals("test", Utils.driver.findElement(By.cssSelector("span.js-description")).getText());
 		//    } catch (Error e) {
 		//      verificationErrors.append(e.toString());
 		//    }
@@ -124,122 +130,176 @@ public class TestCases {
 
 	@Test
 	public void testAddProject() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Projects".equals(driver.findElement(By.linkText("Projects")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Projects".equals(Utils.driver.findElement(By.linkText("Projects")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.linkText("Projects")).click();
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Create Project".equals(driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		Utils.driver.findElement(By.linkText("Projects")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Create Project".equals(Utils.driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).click();
-		//Thread.sleep(1000);
+		Utils.driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).click();
+		//Thread.sleep(Utils.SLEEP_INTERVAL);
 
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("".equals(driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("".equals(Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
-		driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).clear();
-		driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).sendKeys("test");
+		Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).sendKeys("test");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Create".equals(driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Create".equals(Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-		driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).click();
+		Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).click();
+	}
+	
+	public void addProjectClient() throws Exception {
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Projects".equals(Utils.driver.findElement(By.linkText("Projects")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+
+		Utils.driver.findElement(By.linkText("Projects")).click();
+		
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[5]/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div[2]/span"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[5]/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div[2]/span")).click();
+
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/span/a"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/span/a")).click();
+		
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).click();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).sendKeys("seleniumClient");
+		
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.id("js-add-client"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.id("js-add-client")).click();
 	}
 
+	public void goToWorkspaceSettings() throws Exception {
+		//Click arrow for workspace
+				for (int period = 0;; period++) {
+					if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+					try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a"))) break; } catch (Exception e) {}
+					Thread.sleep(Utils.SLEEP_INTERVAL);
+				}
+				Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
+				
+				//Click workspace settings
+				for (int period = 0;; period++) {
+					if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+					try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
+					Thread.sleep(Utils.SLEEP_INTERVAL);
+				}
+				Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
+		
+	}
+	public void selectClientsInWorkspaceSettings() throws Exception {
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[4]/div/ul/li[3]/a"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[4]/div/ul/li[3]/a")).click();
+	}
+	
+	public void enterClientNameAndAddInWorkspaceSettings(String name) throws Exception {
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input")).click();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input")).sendKeys(name);
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div[2]/button"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div[2]/button")).click();
+		
+	}
+
+
+	public void addWorkspaceClient() throws Exception {
+		goToWorkspaceSettings();
+		selectClientsInWorkspaceSettings();
+		enterClientNameAndAddInWorkspaceSettings("seleniumClient");
+	}
+	
+	public void removeClient(String clientName) throws Exception {
+		//Given already on Workspace Settings page
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.cssSelector("span.element.js-clients > span"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}	
+		assertEquals(clientName, Utils.driver.findElement(By.cssSelector("span.element.js-clients > span")).getText());
+		Thread.sleep(Utils.SLEEP_INTERVAL);
+		
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.cssSelector("span > i.icon-remove"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}	
+	    Utils.driver.findElement(By.cssSelector("span > i.icon-remove")).click();
+	}
 	
 	@Test
 	public void testAddAndRemoveClient() throws Exception {
 		//Start add seleniumClient
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if ("Projects".equals(driver.findElement(By.linkText("Projects")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-
-		driver.findElement(By.linkText("Projects")).click();
-		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[5]/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div[2]/span"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[5]/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div[2]/span")).click();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/span/a"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/span/a")).click();
-		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).click();
-		driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).clear();
-		driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).sendKeys("seleniumClient");
-		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.id("js-add-client"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.id("js-add-client")).click();
+		addProjectClient();
 		//End add seleniumClient
+		//Ensure there is no alert
+		try {
+			assertFalse(Utils.driver.findElement(By.cssSelector("div.alert-box.alert")).isDisplayed());
+		} catch (Error e) {
+			Utils.verificationErrors.append("Alert box visible: " + e.toString());
+		}
 
 		//Start remove seleniumClient
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
+		goToWorkspaceSettings();
+		selectClientsInWorkspaceSettings();
 		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
-		System.out.println("-2");
+		addWorkspaceClient();
 		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[4]/div/ul/li[3]/a"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[4]/div/ul/li[3]/a")).click();
-		System.out.println("-1");
-		
-		System.out.println("0");
-		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.cssSelector("span.element.js-clients > span"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
+		//Ensure there is an alert
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.driver.findElement(By.cssSelector("div.alert-box.alert")).isDisplayed()) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}	
-		assertEquals("seleniumClient", driver.findElement(By.cssSelector("span.element.js-clients > span")).getText());
-		Thread.sleep(1000);
 		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("timeout");
-			try { if (isElementPresent(By.cssSelector("span > i.icon-remove"))) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}	
-	    driver.findElement(By.cssSelector("span > i.icon-remove")).click();
+		//Remove client
+		removeClient("seleniumClient");
 	  //End remove seleniumClient
 
 		
@@ -250,43 +310,13 @@ public class TestCases {
 
 	@After
 	public void tearDown() throws Exception {
-		driver.quit();
-		String verificationErrorString = verificationErrors.toString();
+		Utils.driver.quit();
+		String verificationErrorString = Utils.verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
+			System.out.println(verificationErrorString);
 			fail(verificationErrorString);
 		}
 	}
 
-	private boolean isElementPresent(By by) {
-		try {
-			driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-	}
-
-	private boolean isAlertPresent() {
-		try {
-			driver.switchTo().alert();
-			return true;
-		} catch (NoAlertPresentException e) {
-			return false;
-		}
-	}
-
-	private String closeAlertAndGetItsText() {
-		try {
-			Alert alert = driver.switchTo().alert();
-			String alertText = alert.getText();
-			if (acceptNextAlert) {
-				alert.accept();
-			} else {
-				alert.dismiss();
-			}
-			return alertText;
-		} finally {
-			acceptNextAlert = true;
-		}
-	}
+	
 }
