@@ -29,6 +29,41 @@ public class Utils {
 	public static boolean acceptNextAlert = true;
 	public static StringBuffer verificationErrors = new StringBuffer();
 	
+	
+	public static void Login() throws Exception {
+		Utils.driver.get(Utils.baseUrl + "/");
+		Utils.driver.findElement(By.xpath("//div[@id='wrap']/div/div[2]/button")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Log in with Google".equals(Utils.driver.findElement(By.id("google_header_login")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+
+		Utils.driver.findElement(By.id("google_header_login")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("".equals(Utils.driver.findElement(By.id("Email")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+
+		Utils.driver.findElement(By.id("Email")).clear();
+		Utils.driver.findElement(By.id("Email")).sendKeys("416group18");
+		Utils.driver.findElement(By.id("Passwd")).clear();
+		Utils.driver.findElement(By.id("Passwd")).sendKeys("togglaccount");
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("".equals(Utils.driver.findElement(By.id("signIn")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+
+		Utils.driver.findElement(By.id("signIn")).click();
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("416 Group18".equals(Utils.driver.findElement(By.linkText("416 Group18")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+	}
+	
 	public static boolean isElementPresent(By by) {
 		try {
 			driver.findElement(by);

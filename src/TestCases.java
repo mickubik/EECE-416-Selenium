@@ -15,59 +15,12 @@ import org.openqa.selenium.support.ui.Select;
 
 
 public class TestCases {
-	/*	
-	static final int Utils.MS_IN_A_SECOND = 1000;
-	static final int Utils.SLEEP_INTERVAL = 500; //1000 = 1 second
-	static final int Utils.SECONDS_UNTIL_TIMEOUT = 20;
-	static final int Utils.PERIODS_TO_WAIT = (Utils.MS_IN_A_SECOND/Utils.SLEEP_INTERVAL)*Utils.SECONDS_UNTIL_TIMEOUT;
-	
-	private WebDriver driver;
-	private String baseUrl;
-	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();*/
-
 	@Before
 	public void setUp() throws Exception {
 		Utils.driver = new FirefoxDriver();
 		Utils.baseUrl = "https://new.toggl.com/";
 		Utils.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		Login();
-	}
-
-
-	public void Login() throws Exception {
-		Utils.driver.get(Utils.baseUrl + "/");
-		Utils.driver.findElement(By.xpath("//div[@id='wrap']/div/div[2]/button")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("Log in with Google".equals(Utils.driver.findElement(By.id("google_header_login")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.id("google_header_login")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("".equals(Utils.driver.findElement(By.id("Email")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.id("Email")).clear();
-		Utils.driver.findElement(By.id("Email")).sendKeys("416group18");
-		Utils.driver.findElement(By.id("Passwd")).clear();
-		Utils.driver.findElement(By.id("Passwd")).sendKeys("togglaccount");
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("".equals(Utils.driver.findElement(By.id("signIn")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.id("signIn")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("416 Group18".equals(Utils.driver.findElement(By.linkText("416 Group18")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
+		Utils.Login();
 	}
 
 	@Test
@@ -130,46 +83,11 @@ public class TestCases {
 
 	@Test
 	public void testAddProject() throws Exception {
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("Projects".equals(Utils.driver.findElement(By.linkText("Projects")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.linkText("Projects")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("Create Project".equals(Utils.driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).click();
-		//Thread.sleep(Utils.SLEEP_INTERVAL);
-
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("".equals(Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).clear();
-		Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).sendKeys("test");
-
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("Create".equals(Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).click();
+		Projects.goToProjects();
+		Projects.addProject("test");
 	}
 	
-	
-
-	
-
-
-
-	
+		
 	@Test
 	public void testAddAndRemoveClient() throws Exception {
 		//Start add seleniumClient
@@ -192,10 +110,6 @@ public class TestCases {
 		//Remove client
 		WorkspaceSettings.removeClient("seleniumClient");
 	  //End remove seleniumClient
-
-		
-
-
 	}
 
 

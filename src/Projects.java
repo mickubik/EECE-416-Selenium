@@ -15,6 +15,32 @@ public class Projects {
 		Utils.driver.findElement(By.linkText("Projects")).click();
 	}
 	
+	public static void addProject(String name) throws Exception {
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Create Project".equals(Utils.driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+	
+		Utils.driver.findElement(By.xpath("//div[@id='projects-page']/div[2]/div[3]/div/div[2]/button")).click();
+	
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("".equals(Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[13]/div[2]/div/input")).sendKeys(name);
+	
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if ("Create".equals(Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).getText())) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+	
+		Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).click();
+	}
+	
 	public static void addProjectClient() throws Exception {		
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
