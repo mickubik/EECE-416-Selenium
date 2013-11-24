@@ -163,133 +163,24 @@ public class TestCases {
 		Utils.driver.findElement(By.xpath("//div[@id='newProjectModal2']/div[2]/div[2]/button")).click();
 	}
 	
-	public void addProjectClient() throws Exception {
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("Projects".equals(Utils.driver.findElement(By.linkText("Projects")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.linkText("Projects")).click();
-		
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[5]/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div[2]/span"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[5]/div[2]/div[3]/div[2]/div/table/tbody/tr/td[3]/div[2]/span")).click();
-
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/span/a"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/span/a")).click();
-		
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).click();
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).clear();
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[6]/div[2]/div[2]/div[2]/div/div[2]/div/input")).sendKeys("seleniumClient");
-		
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.id("js-add-client"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.id("js-add-client")).click();
-	}
-
-	public void goToWorkspaceSettings() throws Exception {
-		//Click arrow for workspace
-				for (int period = 0;; period++) {
-					if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-					try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a"))) break; } catch (Exception e) {}
-					Thread.sleep(Utils.SLEEP_INTERVAL);
-				}
-				Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
-				
-				//Click workspace settings
-				for (int period = 0;; period++) {
-					if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-					try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
-					Thread.sleep(Utils.SLEEP_INTERVAL);
-				}
-				Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
-		
-	}
-	public void selectClientsInWorkspaceSettings() throws Exception {
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[4]/div/ul/li[3]/a"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[4]/div/ul/li[3]/a")).click();
-	}
 	
-	public void enterClientNameAndAddInWorkspaceSettings(String name) throws Exception {
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input")).click();
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input")).clear();
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div/input")).sendKeys(name);
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div[2]/button"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div[2]/button")).click();
-		
-	}
 
-
-	public void addWorkspaceClient() throws Exception {
-		goToWorkspaceSettings();
-		selectClientsInWorkspaceSettings();
-		enterClientNameAndAddInWorkspaceSettings("seleniumClient");
-	}
 	
-	public void removeClient(String clientName) throws Exception {
-		//Given already on Workspace Settings page
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.cssSelector("span.element.js-clients > span"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}	
-		assertEquals(clientName, Utils.driver.findElement(By.cssSelector("span.element.js-clients > span")).getText());
-		Thread.sleep(Utils.SLEEP_INTERVAL);
-		
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.cssSelector("span > i.icon-remove"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}	
-	    Utils.driver.findElement(By.cssSelector("span > i.icon-remove")).click();
-	}
+
+
+
 	
 	@Test
 	public void testAddAndRemoveClient() throws Exception {
 		//Start add seleniumClient
-		addProjectClient();
-		//End add seleniumClient
-		//Ensure there is no alert
-		try {
-			assertFalse(Utils.driver.findElement(By.cssSelector("div.alert-box.alert")).isDisplayed());
-		} catch (Error e) {
-			Utils.verificationErrors.append("Alert box visible: " + e.toString());
-		}
+		Projects.goToProjects();
+		Projects.addProjectClient();
 
 		//Start remove seleniumClient
-		goToWorkspaceSettings();
-		selectClientsInWorkspaceSettings();
+		WorkspaceSettings.goToWorkspaceSettings();
+		WorkspaceSettings.selectClientsInWorkspaceSettings();
 		
-		addWorkspaceClient();
+		WorkspaceSettings.addWorkspaceClient();
 		
 		//Ensure there is an alert
 		for (int period = 0;; period++) {
@@ -299,7 +190,7 @@ public class TestCases {
 		}	
 		
 		//Remove client
-		removeClient("seleniumClient");
+		WorkspaceSettings.removeClient("seleniumClient");
 	  //End remove seleniumClient
 
 		
