@@ -1,0 +1,13 @@
+<story path="com/eece416/jbehave/JbehaveWeb/Login.story" title="Login story">
+<narrative keyword="Narrative:">
+  <inOrderTo keyword="In order to">allow users access to the web application Toggl</inOrderTo>
+  <asA keyword="As a">test development team</asA>
+  <iWantTo keyword="I want to">use Behaviour-Driven Development</iWantTo>
+</narrative>
+<scenario keyword="Scenario:" title="Logging into the web application">
+<step outcome="failed" keyword="FAILED">Given the <parameter>https://new.toggl.com/</parameter> website is open<failure>java.lang.NullPointerException</failure></step>
+<step outcome="notPerformed" keyword="NOT PERFORMED">When the user clicks login</step>
+<step outcome="notPerformed" keyword="NOT PERFORMED">And enters the correct username and password</step>
+<step outcome="notPerformed" keyword="NOT PERFORMED">Then toggl logs them in and opens the Timer page</step>
+</scenario>
+</story>

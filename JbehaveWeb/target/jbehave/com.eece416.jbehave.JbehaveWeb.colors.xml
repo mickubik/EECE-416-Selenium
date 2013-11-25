@@ -1,0 +1,95 @@
+<story path="com/eece416/jbehave/JbehaveWeb/colors.story" title="">
+<scenario keyword="Scenario:" title="We want show how the behaviour verification of a Flash app can be automated">
+<step outcome="pending" keyword="PENDING">Given a flash app</step>
+<step outcome="pending" keyword="PENDING">Then title is &apos;Clicking Colors&apos;</step>
+<step outcome="pending" keyword="PENDING">And color is GREEN</step>
+<step outcome="pending" keyword="PENDING">And label is &apos;(Click here)&apos;</step>
+<step outcome="pending" keyword="PENDING">When user clicks on square</step>
+<step outcome="pending" keyword="PENDING">Then color is BLUE</step>
+<step outcome="pending" keyword="PENDING">And label is &apos;BLUE&apos;</step>
+<step outcome="pending" keyword="PENDING">When user clicks on square</step>
+<step outcome="pending" keyword="PENDING">Then color is RED</step>
+<step outcome="pending" keyword="PENDING">And label is &apos;RED&apos;</step>
+<step outcome="pending" keyword="PENDING">When user changes label to &apos;Done&apos;</step>
+<step outcome="pending" keyword="PENDING">Then color is RED</step>
+<step outcome="pending" keyword="PENDING">And label is &apos;Done&apos;</step>
+<pendingMethod>@Given(&quot;a flash app&quot;)
+@Pending
+public void givenAFlashApp() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;title is &apos;Clicking Colors&apos;&quot;)
+@Pending
+public void thenTitleIsClickingColors() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;color is GREEN&quot;)
+@Pending
+public void thenColorIsGREEN() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;label is &apos;(Click here)&apos;&quot;)
+@Pending
+public void thenLabelIsClickHere() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@When(&quot;user clicks on square&quot;)
+@Pending
+public void whenUserClicksOnSquare() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;color is BLUE&quot;)
+@Pending
+public void thenColorIsBLUE() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;label is &apos;BLUE&apos;&quot;)
+@Pending
+public void thenLabelIsBLUE() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@When(&quot;user clicks on square&quot;)
+@Pending
+public void whenUserClicksOnSquare() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;color is RED&quot;)
+@Pending
+public void thenColorIsRED() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;label is &apos;RED&apos;&quot;)
+@Pending
+public void thenLabelIsRED() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@When(&quot;user changes label to &apos;Done&apos;&quot;)
+@Pending
+public void whenUserChangesLabelToDone() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;color is RED&quot;)
+@Pending
+public void thenColorIsRED() {
+  // PENDING
+}
+</pendingMethod>
+<pendingMethod>@Then(&quot;label is &apos;Done&apos;&quot;)
+@Pending
+public void thenLabelIsDone() {
+  // PENDING
+}
+</pendingMethod>
+</scenario>
+</story>
