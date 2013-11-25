@@ -26,6 +26,7 @@ public class TestCases {
 	@Test
 	public void testAddTask() throws Exception {
 		// Now logged in
+		Timer.switchToUseTimer();
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
 			try { if (Utils.isElementPresent(By.xpath("//input[@type='text']"))) break; } catch (Exception e) {}
@@ -79,6 +80,59 @@ public class TestCases {
 		//    } catch (Error e) {
 		//      verificationErrors.append(e.toString());
 		//    }
+	}
+	
+	
+
+	
+	@Test
+	public void testAddManualTask() throws Exception {
+		// Now logged in
+		Timer.switchToAddManual();
+
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div/div/div/input"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div/input")).sendKeys("seleniumManualTask");
+		
+		//Open Calendar
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/input"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/input")).click();
+		
+		//Add Start Time
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input")).click();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input")).sendKeys("11:00 AM");
+
+		//Add End Time
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div[2]/input")).click();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div[2]/input")).clear();
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div[2]/input")).sendKeys("1:00 PM");
+		
+		//Apply Calendar time
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div/div[2]/div[2]/section/ul/li/div[7]/div/div/div/div[3]/button"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div[2]/div[2]/section/ul/li/div[7]/div/div/div/div[3]/button")).click();
 	}
 
 	@Test
