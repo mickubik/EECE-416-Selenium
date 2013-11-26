@@ -4,19 +4,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.*;
-
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -26,7 +15,7 @@ public class Utils {
 	static final int SLEEP_INTERVAL = 500; //1000 = 1 second
 	static final int SECONDS_UNTIL_TIMEOUT = 20;
 	static final int PERIODS_TO_WAIT = (MS_IN_A_SECOND/SLEEP_INTERVAL)*SECONDS_UNTIL_TIMEOUT;
-	static final int TIME_TO_WAIT = 15;
+	static final int TIME_TO_WAIT = 30;
 	
 	public static WebDriver driver;
 	public static String baseUrl;

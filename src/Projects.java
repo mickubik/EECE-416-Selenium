@@ -1,4 +1,3 @@
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import org.openqa.selenium.By;
@@ -47,14 +46,6 @@ public class Projects {
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 		Utils.driver.findElement(By.id("js-add-client")).click();
-	
-		//End add seleniumClient
-		//Ensure there is no alert
-/*		try {
-			assertFalse(Utils.driver.findElement(By.cssSelector("div.alert-box.alert")).isDisplayed());
-		} catch (Error e) {
-			Utils.verificationErrors.append("Alert box visible: " + e.toString());
-		}*/
 	}
 
 }

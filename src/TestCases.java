@@ -1,17 +1,12 @@
 
 
-import java.util.regex.Pattern;
+
 import java.util.concurrent.TimeUnit;
-
 import org.junit.*;
-
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -19,6 +14,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TestCases {
 	@Before
 	public void setUp() throws Exception {
+		//File file = new File("C:/Users/Mic/Documents/EECE 416/IEDriverServer.exe");
+		//System.setProperty("webdriver.ie.driver","C:/Users/Mic/Documents/EECE 416/IEDriverServer.exe");
+		//System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+		//Utils.driver = new InternetExplorerDriver();
 		Utils.driver = new FirefoxDriver();
 		Utils.baseUrl = "https://new.toggl.com/";
 		Utils.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -37,7 +36,6 @@ public class TestCases {
 
 	@Test
 	public void testAddTask() throws Exception {
-		// Now logged in
 		Timer.switchToUseTimer();
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
@@ -59,7 +57,6 @@ public class TestCases {
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 
-
 		Utils.driver.findElement(By.xpath("//div[@id='js-new-task-form']/div[6]/button")).click();
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
@@ -80,23 +77,8 @@ public class TestCases {
 			try { if (Utils.isElementPresent(By.xpath("(//input[@type='text'])[3]"))) break; } catch (Exception e) {}
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
-
-		//    for (int period = 0;; period++) {
-		//    	if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-		//    	try { if ("test".equals(Utils.driver.findElement(By.cssSelector("span.js-description")).getText())) break; } catch (Exception e) {}
-		//    	Thread.sleep(Utils.SLEEP_INTERVAL);
-		//    }
-		//
-		//    try {
-		//      assertEquals("test", Utils.driver.findElement(By.cssSelector("span.js-description")).getText());
-		//    } catch (Error e) {
-		//      verificationErrors.append(e.toString());
-		//    }
 	}
-	
-	
-
-	
+		
 	@Test
 	public void testAddManualTask() throws Exception {
 		// Now logged in
@@ -124,7 +106,6 @@ public class TestCases {
 			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input"))) break; } catch (Exception e) {}
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
-
 		
  		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input")).click();
 		Thread.sleep(Utils.SLEEP_INTERVAL);
@@ -134,8 +115,6 @@ public class TestCases {
 		Thread.sleep(Utils.SLEEP_INTERVAL);
 		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input")).sendKeys("11:00 AM");
 		Thread.sleep(Utils.SLEEP_INTERVAL);
-		
-		///html/body/div[2]/div[5]/div/div/div[5]/div/div/div/div/div/input
 		
 		//Add End Time
 		for (int period = 0;; period++) {
@@ -158,19 +137,7 @@ public class TestCases {
 			try { if (Utils.isElementPresent(By.cssSelector("button.btn-set.js-set"))) break; } catch (Exception e) {}
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
-		Utils.driver.findElement(By.cssSelector("button.btn-set.js-set")).click();
-
-		/*Thread.sleep(Utils.SLEEP_INTERVAL);
-		
-		Utils.driver.findElement(By.xpath("(//input[@type='text'])[2]")).click();
-		
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("02:00:00".equals(Utils.driver.findElement(By.xpath("(//input[@type='text'])[2]")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-			System.out.println(Utils.driver.findElement(By.xpath("(//input[@type='text'])[2]")).getText());
-		}		*/
-		
+		Utils.driver.findElement(By.cssSelector("button.btn-set.js-set")).click();		
 	}
 
 	@Test
@@ -184,9 +151,8 @@ public class TestCases {
 		//Start add seleniumClient
 		Projects.goToProjects();
 		Projects.addProjectClient();
-	}
+	}	
 	
-		
 	@Test
 	public void testAddAndRemoveClient() throws Exception {
 		//Start add seleniumClient
@@ -212,52 +178,14 @@ public class TestCases {
 		Utils.driver.findElement(By.id("js-add-client")).click();
 
 		//Start remove seleniumClient
-		//WorkspaceSettings.goToWorkspaceSettings();
-		//Click arrow for workspace
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a"))) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
-		
-		
-		
-		//Click workspace settings
-		
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
-			//try { if (Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click()) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-		WebDriverWait wait = new WebDriverWait(Utils.driver, 10);
-		//WebElement selectElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("formLevel:levels_input")));
-		WebElement selectElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")));
-		//Thread.sleep(Utils.SLEEP_INTERVAL);
-		Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
-		
-		
-		
-		
+		WorkspaceSettings.goToWorkspaceSettings();
+	
 		WorkspaceSettings.selectClientsInWorkspaceSettings();
-		
-		WorkspaceSettings.addWorkspaceClient();
-		
-		//Ensure there is an alert
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if (Utils.driver.findElement(By.cssSelector("div.alert-box.alert")).isDisplayed()) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}	
-		
+
 		//Remove client
 		WorkspaceSettings.removeClient("seleniumClient");
 	  //End remove seleniumClient
 	}
-	
-
-
 
 	@After
 	public void tearDown() throws Exception {
@@ -267,7 +195,5 @@ public class TestCases {
 			System.out.println(verificationErrorString);
 			fail(verificationErrorString);
 		}
-	}
-
-	
+	}	
 }

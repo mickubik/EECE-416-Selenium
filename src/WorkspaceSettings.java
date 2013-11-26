@@ -2,6 +2,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class WorkspaceSettings {
@@ -14,13 +16,17 @@ public class WorkspaceSettings {
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 		Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
-
-		//Click workspace settings
+		
+		//Hover over workspace settings
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
 			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
+		WebElement elems=Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a/i"));//Menu Item
+		Actions builder = new Actions(Utils.driver); 
+		Actions hoverOverRegistrar = builder.moveToElement(elems);
+		hoverOverRegistrar.perform();
 		Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
 	}
 	
@@ -48,7 +54,6 @@ public class WorkspaceSettings {
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
 		Utils.driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[7]/div[7]/div/div[2]/button")).click();
-		
 	}
 	
 	public static void addWorkspaceClient() throws Exception {

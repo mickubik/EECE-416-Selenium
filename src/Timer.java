@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Timer {
 	public static void switchToAddManual() throws Exception {
 		WebElement timerPage = (new WebDriverWait(Utils.driver, Utils.TIME_TO_WAIT)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("html.no-js body div.page-wrapper div.content-wrapper div#timer-page.view div#js-new-task-form.row div.button-container a#switchMode.alternative")));
-
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");{
 				try { 
@@ -27,7 +26,6 @@ public class Timer {
 	
 	public static void switchToUseTimer() throws Exception {
 		WebElement timerPage = (new WebDriverWait(Utils.driver, Utils.TIME_TO_WAIT)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("html.no-js body div.page-wrapper div.content-wrapper div#timer-page.view div#js-new-task-form.row div.button-container a#switchMode.alternative")));
-
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");{
 				try { 
@@ -41,7 +39,5 @@ public class Timer {
 			}
 			Thread.sleep(Utils.SLEEP_INTERVAL);
 		}
-
 	}
-
 }
