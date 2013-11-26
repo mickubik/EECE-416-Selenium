@@ -8,22 +8,22 @@ public class WorkspaceSettings {
 	
 	public static void goToWorkspaceSettings() throws Exception {
 		//Click arrow for workspace
-				for (int period = 0;; period++) {
-					if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-					try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a"))) break; } catch (Exception e) {}
-					Thread.sleep(Utils.SLEEP_INTERVAL);
-				}
-				Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
-				
-				//Click workspace settings
-				for (int period = 0;; period++) {
-					if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-					try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
-					Thread.sleep(Utils.SLEEP_INTERVAL);
-				}
-				Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
-		
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/a")).click();
+
+		//Click workspace settings
+		for (int period = 0;; period++) {
+			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
+			try { if (Utils.isElementPresent(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a"))) break; } catch (Exception e) {}
+			Thread.sleep(Utils.SLEEP_INTERVAL);
+		}
+		Utils.driver.findElement(By.xpath("/html/body/div[2]/div/nav/ul/li[6]/ul/li/a")).click();
 	}
+	
 	public static void selectClientsInWorkspaceSettings() throws Exception {
 		for (int period = 0;; period++) {
 			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");

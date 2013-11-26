@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +15,9 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Utils {
@@ -23,6 +26,7 @@ public class Utils {
 	static final int SLEEP_INTERVAL = 500; //1000 = 1 second
 	static final int SECONDS_UNTIL_TIMEOUT = 20;
 	static final int PERIODS_TO_WAIT = (MS_IN_A_SECOND/SLEEP_INTERVAL)*SECONDS_UNTIL_TIMEOUT;
+	static final int TIME_TO_WAIT = 15;
 	
 	public static WebDriver driver;
 	public static String baseUrl;
@@ -33,35 +37,23 @@ public class Utils {
 	public static void Login() throws Exception {
 		Utils.driver.get(Utils.baseUrl + "/");
 		Utils.driver.findElement(By.xpath("//div[@id='wrap']/div/div[2]/button")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("Log in with Google".equals(Utils.driver.findElement(By.id("google_header_login")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
 
-		Utils.driver.findElement(By.id("google_header_login")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("".equals(Utils.driver.findElement(By.id("Email")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
+		WebElement googleLogin = (new WebDriverWait(Utils.driver, Utils.TIME_TO_WAIT)).until(ExpectedConditions.presenceOfElementLocated(By.id("google_header_login")));
+		assertTrue("Log in with Google".equals(googleLogin.getText()));
+		googleLogin.click();
 
-		Utils.driver.findElement(By.id("Email")).clear();
-		Utils.driver.findElement(By.id("Email")).sendKeys("416group18");
-		Utils.driver.findElement(By.id("Passwd")).clear();
-		Utils.driver.findElement(By.id("Passwd")).sendKeys("togglaccount");
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("".equals(Utils.driver.findElement(By.id("signIn")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
-
-		Utils.driver.findElement(By.id("signIn")).click();
-		for (int period = 0;; period++) {
-			if (period >= Utils.PERIODS_TO_WAIT) fail("timeout");
-			try { if ("416 Group18".equals(Utils.driver.findElement(By.linkText("416 Group18")).getText())) break; } catch (Exception e) {}
-			Thread.sleep(Utils.SLEEP_INTERVAL);
-		}
+		WebElement enterEmail = (new WebDriverWait(Utils.driver, Utils.TIME_TO_WAIT)).until(ExpectedConditions.presenceOfElementLocated(By.id("Email")));
+		assertTrue("".equals(enterEmail.getText()));
+		enterEmail.clear();
+		enterEmail.sendKeys("416group18");
+		
+		WebElement enterPassword = (new WebDriverWait(Utils.driver, Utils.TIME_TO_WAIT)).until(ExpectedConditions.presenceOfElementLocated(By.id("Passwd")));
+		assertTrue("".equals(enterPassword.getText()));
+		enterPassword.clear();
+		enterPassword.sendKeys("togglaccount");
+		
+		WebElement signIn = (new WebDriverWait(Utils.driver, Utils.TIME_TO_WAIT)).until(ExpectedConditions.presenceOfElementLocated(By.id("signIn")));
+		signIn.click();
 	}
 	
 	public static boolean isElementPresent(By by) {
